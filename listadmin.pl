@@ -274,7 +274,7 @@ sub process_subscriptions {
     }
     my $count = keys (%subscribers);
     my $def = $config->{"subdefault"};
-    my $prompt = 'Accept/Reject/Skip/Quit';
+    my $prompt = 'Accept/Discard/Reject/Skip/Quit';
     $prompt .= " [" . uc($def) . "]" if $def;
     $prompt .= " ? ";
 
@@ -301,6 +301,9 @@ sub process_subscriptions {
 	    } elsif ($ans eq "a") {
 		$change->{$id} = [ "sa" ];
 		last;
+	    } elsif ($ans eq "d") {
+		$change->{$id} = [ "sd" ]; 
+		last; 
 	    } elsif ($ans eq "r") {
 		my $r = prompt ("Why do you reject? [optional] ");
 		unless (defined $r) {
@@ -315,6 +318,7 @@ and pressing Return.
 
   a  Accept    -- allow the user to join the mailing list
   r  Reject    -- notify sender that the request was turned down
+  d  Discard   -- silently discard the request
   s  Skip      -- do not decide now, leave it for later
   q  Quit      -- go on to approving messages
 
@@ -1102,6 +1106,7 @@ sub set_param_values {
 					 "d" => 3,
 					 "sa" => 4, # subscribe approve
 					 "sr" => 2, # subscribe reject
+					 "sd" => 3, # subsribe discard
 				     };
     } else {
 	$data->{"global"}{"actions"} = { "a" => 0,
@@ -1139,7 +1144,7 @@ sub read_config {
 
     my %act = ("approve" => "a", "discard" => "d",
 	       "reject" => "r", "skip" => "s", "none" => "");
-    my %sact = ("accept" => "a",
+    my %sact = ("accept" => "a", "discard" => "d", 
 		"reject" => "r", "skip" => "s", "none" => "");
 
     return undef unless open (CONF, $file);
@@ -1386,7 +1391,7 @@ sub commit_changes {
     for my $id (sort { $a <=> $b } keys %{$change}) {
 	my ($what, $text) = @{$change->{$id}};
 	$params->{$id} = $action->{$what};
-	unless ($what =~ /^s[ar]$/) {
+	unless ($what =~ /^s[ard]$/) {
 	    # we don't log subscription approval or rejects
 	    $log .= sprintf ("%s D:[%s] F:[%s] S:[%s]\n",
 			     $what,
