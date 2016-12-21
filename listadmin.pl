@@ -25,6 +25,7 @@ use I18N::Langinfo qw(langinfo CODESET); # appeared in Perl 5.7.2
 use Encode; # appeared in perl 5.7.1
 use strict;
 use English;
+use IO::Socket::SSL;
 
 my $rc = $ENV{"HOME"}."/.listadmin.ini";
 
@@ -93,6 +94,9 @@ my $time_limit = time + 60 * ($opt_t || 24*60);
 my $term;
 my $term_encoding = langinfo(CODESET());
 
+my $default_ssl_cafile = $ua->ssl_opts("SSL_ca_file");
+my $default_ssl_verify = IO::Socket::SSL::SSL_VERIFY_PEER; # This is the default for clients
+
 # the C and POSIX locale in Solaris uses the charset "646", but Perl
 # doesn't support it.
 $term_encoding = "ascii" if $term_encoding eq "646";
@@ -131,10 +135,18 @@ my $list = $lists[0];
 
 my $subscribe_result;
 if (@opt_add_member) {
+    $ua->ssl_opts("SSL_ca_file" => $config->{$list}->{"cafile"});
+    $ua->ssl_opts("verify_hostname" => $config->{$list}->{"verify_hostname"});
+    $ua->ssl_opts("SSL_verify_mode" => $config->{$list}->{"verify_peer"});
+
     $subscribe_result = add_subscribers($list, $config->{$list}, $opt_mail,
 					@opt_add_member);
 }
 if (@opt_remove_member) {
+    $ua->ssl_opts("SSL_ca_file" => $config->{$list}->{"cafile"});
+    $ua->ssl_opts("verify_hostname" => $config->{$list}->{"verify_hostname"});
+    $ua->ssl_opts("SSL_verify_mode" => $config->{$list}->{"verify_peer"});
+
     $subscribe_result = remove_subscribers($list, $config->{$list},
 					   @opt_remove_member);
 }
@@ -150,6 +162,10 @@ if (defined $subscribe_result) {
     }
 }
 if (defined $opt_l) {
+    $ua->ssl_opts("SSL_ca_file" => $config->{$list}->{"cafile"});
+    $ua->ssl_opts("verify_hostname" => $config->{$list}->{"verify_hostname"});
+    $ua->ssl_opts("SSL_verify_mode" => $config->{$list}->{"verify_peer"});
+
     my @subscribers = list_subscribers($list, $config->{$list});
     print join("\n", @subscribers, "");
     exit(@subscribers == 0);
@@ -162,6 +178,10 @@ for (@lists) {
     $list = $_;
     my $user = $config->{$list}{"user"};
     my $pw = $config->{$list}{"password"} || "";
+
+    $ua->ssl_opts("SSL_ca_file" => $config->{$list}->{"cafile"});
+    $ua->ssl_opts("verify_hostname" => $config->{$list}->{"verify_hostname"});
+    $ua->ssl_opts("SSL_verify_mode" => $config->{$list}->{"verify_peer"});
 
     if (time > $time_limit) {
 	print "Time's up, skipping the remaining lists\n";
@@ -1108,6 +1128,9 @@ sub read_config {
     $cur{user} = $cur{password} = $cur{action} = $cur{default} = "";
     $cur{confirm} = 1;
     $cur{unprintable} = "questionmark";
+    $cur{cafile} = $default_ssl_cafile;
+    $cur{verify_peer} = $default_ssl_verify;
+    $cur{verify_hostname} = 1;
 
     my $conf = {};
     my $line = "";
@@ -1218,6 +1241,23 @@ sub read_config {
 		print STDERR "$file:$lineno: Illegal format for ".
 			"unprintable characters: '$cur{unprintable}'\n";
 		exit 1;
+	    }
+	} elsif ($line =~ /^cafile\s+/i) {
+	    $cur{cafile} = unquote($POSTMATCH);
+	    $cur{cafile} = $default_ssl_cafile
+		    if $cur{cafile} eq "NONE";
+	} elsif ($line =~ /^verify_peer\s+/i) {
+	    my $value = unquote($POSTMATCH);
+	    if ($value eq "no") {
+            $cur{verify_peer} = IO::Socket::SSL::SSL_VERIFY_NONE;
+            $cur{verify_hostname} = 0;
+	    } elsif ($value eq "yes") {
+            $cur{verify_peer} = $default_ssl_verify;
+            $cur{verify_hostname} = 1;
+	    } else {
+            print STDERR "$file:$lineno: Illegal value: '$value\n";
+            print STDERR "choose one of yes or no\n";
+            exit 1;
 	    }
 	} else {
 	    print STDERR "$file:$lineno: Syntax error: '$line'\n";

@@ -173,6 +173,13 @@ This option is enabled by default for lists in uio.no, and is needed
 to avoid clearing the list of meta members when manipulating the list
 of ordinary members.  \fINote: Requires additional Perl module
 WWW::Mechanize\fP
+.IP "cafile \fI/path/to/CAcertificate\fP"
+Specify which CA certificate to use for all lists following. Setting
+cafile to NONE will use the default cafile.
+.IP "verify_peer \fIyes|no\fP"
+If set to no SSL certificate verification will be disabled for all lists
+following.
+
 
 \" "dumpdir" is for developer use, so it isn't documented.
 
