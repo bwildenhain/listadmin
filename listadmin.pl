@@ -742,7 +742,7 @@ sub get_list {
     }
 
     my $data;
-    if ($mmver eq "2.1") {
+    if ($mmver ge "2.1") {
 	my $parse_appr = HTML::TokeParser->new(\$page_appr) || die;
 	$data = parse_pages_mm_2_1($mmver, $config, $parse, $parse_appr);
     } else {
@@ -788,14 +788,26 @@ sub parse_pages_mm_2_1 {
     my %data = ();
     my $headline;
 
+    # some (newer?) servers show only 1 <hr> tag when there is no subscriptions
+    # Try resolve first seen <hr> as subscription, and fall back to approvals
     $parse_subs->get_tag ("hr");
     if ($parse_subs->get_tag ("h2")) {
-	parse_subscriptions ($mmver, $config, $parse_subs, \%data);
-    }
+	my $title = $parse_subs->get_trimmed_text ("/h2") || die;
+	if ($title =~ get_trans_re("subscriptions")) {
+	    parse_subscriptions ($mmver, $config, $parse_subs, \%data);
 
-    $parse_appr->get_tag ("hr");
-    if ($parse_appr->get_tag ("h2")) {
-	parse_approvals ($mmver, $config, $parse_appr, \%data);
+	    $parse_appr->get_tag ("hr");
+	    if ($parse_appr->get_tag ("h2")) {
+		parse_approvals ($mmver, $config, $parse_appr, \%data);
+	    }
+	} else {
+	    parse_approvals ($mmver, $config, $parse_appr, \%data);
+	}
+    } else {
+	$parse_appr->get_tag ("hr");
+	if ($parse_appr->get_tag ("h2")) {
+	    parse_approvals ($mmver, $config, $parse_appr, \%data);
+	}
     }
     return (\%data);
 }
