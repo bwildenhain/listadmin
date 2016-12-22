@@ -1,4 +1,4 @@
-.TH LISTADMIN 1 "24 Feb 2005"
+.TH LISTADMIN 1 "2016-12-21"
 .\" turn off hyphenation
 .hy 0
 .\" turn on ragged right if run through nroff
@@ -312,4 +312,6 @@ double width characters (e.g. Chinese).  This is probably a bug in
 Text::Reform.
 .SH AUTHOR
 Kjetil T. Homme <kjetilho+listadmin@ifi.uio.no>
+
+Project manager: Johnny A. Solbu <johnny@solbu.net>
 .br
