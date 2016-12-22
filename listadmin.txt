@@ -1,49 +1,49 @@
-LISTADMIN(1)                                                      LISTADMIN(1)
+LISTADMIN(1)                General Commands Manual               LISTADMIN(1)
 
-NAME
+[1mNAME[0m
        listadmin - process messages held by Mailman for approval
 
-SYNOPSIS
-       listadmin [-?] [-V] [-f configfile] [-t minutes] [--mail] [--nomail]
-       [{-a|-r} file] [--add-member address] [--remove-member address] [-l]
-       [listname]
+[1mSYNOPSIS[0m
+       [1mlistadmin [-?] [-V] [-f [4m[22mconfigfile[24m[1m] [-t [4m[22mminutes[24m[1m] [--mail] [--nomail][0m
+       [1m[{-a|-r} [4m[22mfile[24m[1m] [--add-member [4m[22maddress[24m[1m] [--remove-member [4m[22maddress[24m[1m] [-l][0m
+       [1m[[4m[22mlistname[24m[1m][0m
 
-DESCRIPTION
-       listadmin is a textual alternative to Mailman's WWW interface for
+[1mDESCRIPTION[0m
+       [4mlistadmin[24m is a textual alternative to Mailman's WWW interface for
        administering mailing lists.
 
-OPTIONS
-       -f configfile
-              Fetch list of mailing lists from configfile rather than the
-              default (~/.listadmin.ini).
+[1mOPTIONS[0m
+       -f [4mconfigfile[0m
+              Fetch list of mailing lists from [4mconfigfile[24m rather than the
+              default ([1m~/.listadmin.ini[22m).
 
-       -t minutes
-              Stop processing after minutes has passed.  Mostly useful for
-              completely automated configurations of listadmin.
+       -t [4mminutes[0m
+              Stop processing after [4mminutes[24m has passed.  Mostly useful for
+              completely automated configurations of [1mlistadmin[22m.
 
-       --mail Addresses added as subscribers will have nomail turned off.
+       --mail Addresses added as subscribers will have [4mnomail[24m turned off.
 
        --nomail
-              Addresses added as subscribers will have nomail turned on.
+              Addresses added as subscribers will have [4mnomail[24m turned on.
 
-       -a file
-              Add e-mail addresses listed in file (one address per line) to
+       -a [4mfile[0m
+              Add e-mail addresses listed in [4mfile[24m (one address per line) to
               the subscriber list.  The welcome message is suppressed.
 
-       --add-member address
-              Add address to the subscriber list, works as above.
+       --add-member [4maddress[0m
+              Add [4maddress[24m to the subscriber list, works as above.
 
-       -r file
-              Remove e-mail addresses listed in file (one address per line)
+       -r [4mfile[0m
+              Remove e-mail addresses listed in [4mfile[24m (one address per line)
               from the subscriber list.
 
-       --remove-member address
-              Remove address from the subscriber list.
+       --remove-member [4maddress[0m
+              Remove [4maddress[24m from the subscriber list.
 
        -l     Display the subscriber list.
 
-       listname
-              Only process the lists matching listname.  Specify a complete
+       [4mlistname[0m
+              Only process the lists matching [4mlistname[24m.  Specify a complete
               address, a substring or a regular expression.
 
        -? or --help
@@ -52,7 +52,7 @@ OPTIONS
        -V or --version
               Output version number.
 
-CONFIGURATION SYNTAX
+[1mCONFIGURATION SYNTAX[0m
        The configuration file contains lines which can contain either a
        comment, a directive, or a mailing list address.
 
@@ -66,153 +66,162 @@ CONFIGURATION SYNTAX
        space characters.  Inside double quotes, \" can be used to include a
        literal double quote, and \\ for a literal backslash.
 
-DIRECTIVES
+[1mDIRECTIVES[0m
        A directive affects all the mailing lists addresses which follow after
        it in the configuration file.  The directives are:
 
-              username username
+              username [4musername[0m
                      Specifies the username to use for authentication.  (Not
                      all Mailman servers require a username.)
 
-              password password
+              password [4mpassword[0m
                      Specifies the password to use for authentication.
 
-              adminurl url
+              adminurl [4murl[0m
                      The URL for maintaining Mailman requests.  Some
                      substitutions are performed: (examples below refer to the
-                     hypothetical list foo-devel@example.net)
+                     hypothetical list [4mfoo-devel@example.net[24m)
 
-                      {list} The local part of the list name, e.g., "foo-
-                             devel".
+                     {list} The local part of the list name, e.g., "foo-
+                            devel".
 
                      {domain}
-                             The domain part of the list name, e.g.,
-                             "example.net".
+                            The domain part of the list name, e.g.,
+                            "example.net".
 
                      {subdomain}
-                             The first component of the domain part, e.g.,
-                             "example".
+                            The first component of the domain part, e.g.,
+                            "example".
 
-              default action
+              default [4maction[0m
                      Specifies the action to take when the user presses just
                      Return.  Available actions are:
 
                      approve
-                             The message will be sent to all member of the
-                             list.
+                            The message will be sent to all member of the
+                            list.
 
-                      reject Notify sender that the message was rejected.
+                     reject Notify sender that the message was rejected.
 
                      discard
-                             Throw message away, don't notify sender.
+                            Throw message away, don't notify sender.
 
-                      skip   Don't decide now, leave it for later.
+                     skip   Don't decide now, leave it for later.
 
-                      none   Reset to no default action.
+                     none   Reset to no default action.
 
-              action action
+              action [4maction[0m
                      This action will be taken for all messages where none of
-                     the other rules apply (e.g., spamlevel, discard_if_from
+                     the other rules apply (e.g., [4mspamlevel[24m, [4mdiscard_if_from[0m
                      etc.), ie., whenever the user would have been asked what
-                     to do.  The same actions as for default are available,
+                     to do.  The same actions as for [4mdefault[24m are available,
                      although reject isn't very useful.
 
-              spamlevel number
+              spamlevel [4mnumber[0m
                      This specifies the threshold for automatic discard of
                      suspected spam messages.  12 is unlikely to have false
                      positives.  No user confirmation is needed, so it is best
                      to play it safe.  Less than 5 is not recommended.
 
-              spamheader header-name
+              spamheader [4mheader-name[0m
                      The name of the header which contains the spam score.  It
                      is assumed that the score is encoded as a sequence of
                      characters, like "*****" for the value 5.  By default it
                      will look for all headers with names containing "spam"
                      and "score" or "level", and pick the highest score if
                      there is more than one. Setting the header-name to
-                     default will restore this behaviour.
+                     [4mdefault[24m will restore this behaviour.
 
-              not_spam_if_from pattern
+              not_spam_if_from [4mpattern[0m
                      If the message's From header matches the pattern, all
                      automatic actions will be cancelled and you will be asked
                      what action to take explicitly.  The pattern can use Perl
                      regexp syntax.  If enclosed in slashes, some modifiers
-                     can be added, a typical example being /pattern/i to match
+                     can be added, a typical example being [1m/pattern/i [22mto match
                      case-insensitively.
 
-              not_spam_if_subject pattern
+              not_spam_if_subject [4mpattern[0m
                      As above, but matches against the Subject header.
 
-              discard_if_from pattern
+              discard_if_from [4mpattern[0m
                      If the message's From header matches the pattern, it will
                      be discarded automatically.
 
-              discard_if_subject pattern
+              discard_if_subject [4mpattern[0m
                      As above, but matches against the Subject header.
 
-              discard_if_reason pattern
+              discard_if_reason [4mpattern[0m
                      As above, but matches against Mailman's reason for
                      holding the message for approval.
 
-              subscription_default action
+              subscription_default [4maction[0m
                      Specifies the action to take when the user presses just
                      Return while processing subscriptions.  Available actions
                      are:
 
-                      accept The new subscriber will be added.
+                     accept The new subscriber will be added.
 
-                      reject Notify sender that s/he was not allowed to join
-                             the list.
+                     reject Notify sender that s/he was not allowed to join
+                            the list.
 
-                      skip   Don't decide now, leave it for later.
+                     skip   Don't decide now, leave it for later.
 
-                      none   Reset to no default action.
+                     none   Reset to no default action.
 
-              subscription_action action
-                     This action will be taken always for all new subscribers
+              subscription_action [4maction[0m
+                     This action will be taken [1malways [22mfor all new subscribers
                      in the relevant lists, no user interaction will take
-                     place.  The same actions as for subscription_default are
+                     place.  The same actions as for [4msubscription_default[24m are
                      available, although only skip is very useful.  It is
                      better to get automatic accept and reject behaviour by
                      changing the Mailman configuration.
 
-              confirm yes|no
+              confirm [4myes|no[0m
                      Before submitting changes, ask for confirmation.  Default
                      is "yes".
 
-              unprintable questionmark|unicode
+              unprintable [4mquestionmark|unicode[0m
                      If the subject or sender address contains characters the
                      terminal can't display, they will be replaced by either
-                     "<?>" (in questionmark mode, the default) or something
-                     like "<U+86a8>" (in unicode mode).
+                     "<?>" (in [4mquestionmark[24m mode, the default) or something
+                     like "<U+86a8>" (in [4municode[24m mode).
 
-              log filename
+              log [4mfilename[0m
                      Changes submitted to the web interface are logged.  All
                      the changes for one list are sent in batches at the end
                      of processing.  The format in the log is first a line
                      containing the list name and a time stamp in local time.
                      Then one line for each message, in the format
 
-                     action D:[date] F:[sender] S:[subject]
+                     [4maction[24m D:[[4mdate[24m] F:[[4msender[24m] S:[[4msubject[24m]
 
                      This batch of lines is terminated by a line saying
-                     changes sent to server.
+                     [1mchanges sent to server[22m.
 
-                     The same substitutions are performed on filename as on
-                     the argument to adminurl.  Tilde syntax can be used to
-                     refer to home directories.  The filename none turns off
+                     The same substitutions are performed on [4mfilename[24m as on
+                     the argument to [1madminurl[22m.  Tilde syntax can be used to
+                     refer to home directories.  The filename [1mnone [22mturns off
                      logging.
 
-              meta_member_support yes|no
+              meta_member_support [4myes|no[0m
                      Meta members are an experimental feature at the
                      University of Oslo.  This option is enabled by default
                      for lists in uio.no, and is needed to avoid clearing the
                      list of meta members when manipulating the list of
-                     ordinary members.  Note: Requires additional Perl module
-                     WWW::Mechanize
+                     ordinary members.  [4mNote:[24m [4mRequires[24m [4madditional[24m [4mPerl[24m [4mmodule[0m
+                     [4mWWW::Mechanize[0m
 
-INTERACTIVE USE
-       The user interface to listadmin is line oriented with single letter
+              cafile [4m/path/to/CAcertificate[0m
+                     Specify which CA certificate to use for all lists
+                     following. Setting cafile to NONE will use the default
+                     cafile.
+
+              verify_peer [4myes|no[0m
+                     If set to no SSL certificate verification will be
+                     disabled for all lists following.
+
+[1mINTERACTIVE USE[0m
+       The user interface to [1mlistadmin [22mis line oriented with single letter
        commands.  By pressing Return, the default action is chosen.  The
        default action is printed in brackets in the prompt.  The available
        actions are:
@@ -232,30 +241,30 @@ INTERACTIVE USE
 
               t      View Time, display the Date header from the message.
 
-              number Jump forward or backward to message number.
+              [4mnumber[24m Jump forward or backward to message [4mnumber[24m.
 
               u      Go back to the previous message and undo the last
                      approve, discard or reject action.
 
-              /pattern
+              /[4mpattern[0m
                      Search (case-insensitively) for the next message with
-                     matching From or Subject.  If pattern is left out, the
+                     matching From or Subject.  If [4mpattern[24m is left out, the
                      previous value will be used.
 
-              ?pattern
+              ?[4mpattern[0m
                      As above, but backwards.
 
               .      Redisplay information about current message.
 
-              add    Add address as subscriber to the list.  If address is
+              add    Add [4maddress[24m as subscriber to the list.  If [4maddress[24m is
                      left out, use the sender of the current message.
 
-              nomail As add, but adds address with "nomail" enabled.
+              nomail As [4madd[24m, but adds [4maddress[24m with "nomail" enabled.
 
-              list   List subscriber addresses matching pattern, or the full
-                     list if no pattern is specified.
+              list   List subscriber addresses matching [4mpattern[24m, or the full
+                     list if no [4mpattern[24m is specified.
 
-              rem    Remove address from the subscriber list.  Note: there is
+              rem    Remove [4maddress[24m from the subscriber list.  Note: there is
                      no undo for this action.
 
               q      Quit processing this list and go on to the next.
@@ -264,7 +273,7 @@ INTERACTIVE USE
        reached.  At that time, the user will be prompted whether the changes
        should be submitted to Mailman (see also "confirm" directive above).
 
-EXAMPLES
+[1mEXAMPLES[0m
        To process only the lists of a single domain, specify the domain as the
        pattern:
           listadmin example.com
@@ -308,22 +317,22 @@ EXAMPLES
           confirm no
           foo-announce@example.net
 
-ENVIRONMENT
-       http_proxy or HTTP_PROXY
+[1mENVIRONMENT[0m
+       [1mhttp_proxy [22mor [1mHTTP_PROXY[0m
               Specifies a proxy to use for HTTP.
 
-       https_proxy or HTTPS_PROXY
+       [1mhttps_proxy [22mor [1mHTTPS_PROXY[0m
               Specifies a proxy to use for HTTPS.
 
-       LC_CTYPE
+       [1mLC_CTYPE[0m
               The character set support is deduced from this variable.
 
-FILES
-       $HOME/.listadmin.ini
+[1mFILES[0m
+       [1m$HOME/.listadmin.ini[0m
 
        The default configuration file.
 
-BUGS
+[1mBUGS[0m
        The HTML parser is quite fragile and depends on Mailman not to change
        the format of its generated code.
 
@@ -331,7 +340,9 @@ BUGS
        double width characters (e.g. Chinese).  This is probably a bug in
        Text::Reform.
 
-AUTHOR
+[1mAUTHOR[0m
        Kjetil T. Homme <kjetilho+listadmin@ifi.uio.no>
 
-                                  24 Feb 2005                     LISTADMIN(1)
+       Project manager: Johnny A. Solbu <johnny@solbu.net>
+
+                                  2016-12-21                      LISTADMIN(1)
