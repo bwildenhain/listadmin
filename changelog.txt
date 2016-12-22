@@ -1,0 +1,6 @@
+2.41
+Applied Debian pathces
+- Add support for discarding subscription requests
+- Add translations
+- Add option to disable certificate checking
+- Add option to configure which CA certificate file to use
