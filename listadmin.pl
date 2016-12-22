@@ -11,7 +11,7 @@
 #
 # Released into public domain.
 
-my $version = "2.41";
+my $version = "2.42";
 my $maintainer = "johnny\@solbu.net";
 
 use HTML::TokeParser;
