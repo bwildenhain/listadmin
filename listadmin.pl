@@ -673,7 +673,7 @@ sub get_list {
     unless ($resp->is_success) {
 	return {'servererror' => $resp->status_line, 'url' => $url};
     }
-    $page = $resp->content;
+    $page = $resp->decoded_content ;
 
     my $dumpdir = $config->{"dumpdir"};
     my $dumpfile;
@@ -735,7 +735,7 @@ sub get_list {
 	unless ($resp->is_success) {
 	    return {'servererror' => $resp->status_line, 'url' => $url};
 	}
-	$page_appr = $resp->content;
+	$page_appr = $resp->decoded_content ;
 	if (defined $dumpdir &&
 	    open (DUMP, ">$dumpdir/dump-details-$list.html")) {
 	    print DUMP $page_appr;
@@ -1756,7 +1756,7 @@ sub add_subscribers {
     my $resp = $ua->post($url, \%params);
     return $resp->status_line unless $resp->is_success;
 
-    my $result = parse_subscribe_response($resp->content);
+    my $result = parse_subscribe_response($resp->decoded_content );
 
     if (!$mail) {
 	my %left = map { $_ => 1 } @addresses;
@@ -1814,7 +1814,7 @@ sub remove_subscribers {
     my $resp = $ua->post($url, \%params);
     return $resp->status_line unless $resp->is_success;
 
-    return parse_subscribe_response($resp->content);
+    return parse_subscribe_response($resp->decoded_content );
 }
 
 
@@ -1891,7 +1891,7 @@ sub list_subscribers {
 		unless $letter eq "a";
 
 	while ($resp->is_success) {
-	    $page = $resp->content;
+	    $page = $resp->decoded_content ;
 	    $parse = HTML::TokeParser->new(\$page);
 	    my $count = 0;
 	    my $repeated = 0;
@@ -1976,7 +1976,7 @@ sub fetch_meta_members {
 
     $agent->get(mailman_url($list, $config->{adminurl}, "", "members"));
 
-    my $page = $agent->content();
+    my $page = $agent->decoded_content ();
     my $parse = HTML::TokeParser->new(\$page);
     my $tag = $parse->get_tag("textarea");
     $tag = $parse->get_tag("textarea");
