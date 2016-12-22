@@ -1,3 +1,6 @@
+2.42
+- Fix Parsing of undecoded UTF-8 error
+
 2.41
 Applied Debian pathces
 - Add support for discarding subscription requests
