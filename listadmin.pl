@@ -4,13 +4,15 @@
 # Written 2003 - 2007 by
 # Kjetil Torgrim Homme <kjetilho+listadmin@ifi.uio.no>
 #
+# 2016: Johnny A. Solbu <johnny@solbu.net>
+#
 # Thank you, Sam Watkins and Bernie Hoeneisen, for contributions and
 # feedback.
 #
 # Released into public domain.
 
-my $version = "2.40";
-my $maintainer = "kjetilho+listadmin\@ifi.uio.no";
+my $version = "2.41";
+my $maintainer = "johnny\@solbu.net";
 
 use HTML::TokeParser;
 use LWP::UserAgent;
