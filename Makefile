@@ -38,10 +38,5 @@ distclean:
 	rm -rf $(TARFILE) listadmin.txt listadmin-$(VERSION)
 
 # for my use only
-WWW_DOCS = /hom/kjetilho/www_docs/hacks
-publish: dist
-	cp -p listadmin.txt $(WWW_DOCS)/listadmin.txt
-	cp -p $(TARFILE) $(WWW_DOCS)/
-	cp -p listadmin.pl $(WWW_DOCS)/listadmin
-	cp -p listadmin.man $(WWW_DOCS)/listadmin.man
-	perl -pi -e 's/listadmin(.)\d+\.\d+/listadmin$${1}'$(VERSION)'/g' $(WWW_DOCS)/index.html
+upload:
+	rsync -avh --progress $(TARFILE) solbu@frs.sourceforge.net:/home/frs/project/listadmin/$(VERSION)/
