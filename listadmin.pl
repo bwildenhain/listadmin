@@ -28,6 +28,7 @@ use Encode; # appeared in perl 5.7.1
 use strict;
 use English;
 use IO::Socket::SSL;
+use Net::INET6Glue::INET_is_INET6;
 
 my $rc = $ENV{"HOME"}."/.listadmin.ini";
 
