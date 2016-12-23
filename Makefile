@@ -9,7 +9,7 @@ prefix = $(PREFIX)
 bindir = $(prefix)/bin
 mandir = $(prefix)/share/man
 
-SRCFILES = Makefile listadmin.pl listadmin.man changelog.txt
+SRCFILES = Makefile listadmin.pl listadmin.1 changelog.txt
 
 all:
 	@echo Nothing needs to be done
@@ -17,9 +17,9 @@ all:
 install:
 	$(INSTALL) -d $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -m 755 listadmin.pl $(DESTDIR)$(bindir)/listadmin
-	$(INSTALL) -m 644 listadmin.man $(DESTDIR)$(mandir)/man1/listadmin.1
+	$(INSTALL) -m 644 listadmin.1 $(DESTDIR)$(mandir)/man1/listadmin.1
 
-listadmin.txt: listadmin.man
+listadmin.txt: listadmin.1
 #	Note the verbatim backspace in the sed command
 	env TERM=dumb nroff -man $< | sed -e '/^XXX/d' -e 's/.//g' | uniq > $@.tmp
 	mv $@.tmp $@
