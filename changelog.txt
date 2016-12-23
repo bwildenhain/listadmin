@@ -1,6 +1,7 @@
 2.42
 - Fix Parsing of undecoded UTF-8 error
 - Add IPv6 support (Debian bug #699768)
+- Use proper filename for manpage (listadmin.man > listadmin.1)
 
 2.41
 Applied Debian pathces
