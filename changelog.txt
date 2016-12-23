@@ -1,9 +1,10 @@
 2.42
 - Fix Parsing of undecoded UTF-8 error
+- Add IPv6 support (Debian bug #699768)
 
 2.41
 Applied Debian pathces
 - Add support for discarding subscription requests
 - Add translations
-- Add option to disable certificate checking
+- Add option to disable certificate checking (Debian bug #707787)
 - Add option to configure which CA certificate file to use
