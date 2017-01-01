@@ -1,0 +1,106 @@
+           A sample listadmin session
+
+: [kjetilho@rovereto ~]; listadmin
+fetching data for i18n-no@lister.hidden.uio.no ...
+
+[1/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    bubulle@example.org
+Subject: Shadow package templates update
+Reason:  Too many recipients to the message                    Spam? 0
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ? a
+
+   This looks legitimate, so I type «a» followed by Return.
+[2/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    243232@msn.com
+Subject: Operating Systems 243232
+Reason:  Post by non-member to a members-only list             Spam? 10
+Automatically discarded as spam.
+
+[3/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    tsuruoka@quintanaroo.com
+Subject: Advert: i18n-no@lister.hidden.uio.no - Brand-models from $900.
+Reason:  Post by non-member to a members-only list             Spam? 6
+Automatically discarded as spam.
+
+[4/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    bubulle@example.org
+Subject: Debian Installer : new string to translate
+Reason:  Too many recipients to the message                    Spam? 0
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ? a
+
+[5/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    petter.reinholdtsen@hidden.uio.no
+Subject: Sjekk .po-filene fr de sendes videre
+Reason:  Post by non-member to a members-only list             Spam? 0
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ? a
+
+   Messages 2 and 3 are discarded automatically due to the score given to
+   them by SpamAssassin, then I have to type a little to approve 4 and 5.
+[6/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    rev_donald@doramail.com
+Subject: GLOBAL EMANCIPATION FOR WORLD PEACE!
+Reason:  Post by non-member to a members-only list             Spam? 8
+Automatically discarded as spam.
+
+[7/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    rev_donald@doramail.com
+Subject: GLOBAL EMANCIPATION FOR WORLD PEACE!
+Reason:  Post by non-member to a members-only list             Spam? 0
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ?
+
+   SpamAssassin strikes again, but misses on message 7. I have to press
+   Return to discard it.
+[8/8] ========== i18n-no@lister.hidden.uio.no ==========
+From:    hidden@example.pl
+Subject: Re: Debian Installer : Yet another string change..:-)
+Reason:  Post by non-member to a members-only list             Spam? 0
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ? b
+
+   This is an unknown contributor, so I ask to look at the first 20 lines
+   of the body of the message.
+--HcAYCG3uE/tztfnV
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Apr 04, 2004 at 08:11:32AM +0200, Christian P wrote:
+> Have a nice week-end.
+
+I thought that someone told that we will use -i18n list for these
+purposes... am I right?
+
+I know that this is very important to reach as many translators as
+possible, but I don't want private mails!
+
+I have some SMS sending procmail scripts and daily limit for SMSes from
+net. So please do not send me private mails... I read l10n & i18n lists
+so I can check what's new there. I can also check it on seppy's webpage,
+so I really don't need any additional info.
+
+Approve/Reject/Discard/Skip/view Body/view Full/jump #/Help/Quit [D] ?
+
+   It's an off-topic rant, so I discard it.
+Submit changes? [yes]
+
+   Send off my choices to the web interface, then go on to the other lists
+   I admin:
+fetching data for iml@hidden.uio.no ... nothing in queue
+fetching data for dewy-fields@hidden.uio.no ... nothing in queue
+fetching data for is@hidden.uio.no ... nothing in queue
+fetching data for alle-ansatte@hidden.uio.no ... nothing in queue
+fetching data for blab-drift@hidden.uio.no ... nothing in queue
+fetching data for cim-bug@hidden.uio.no ...
+
+[1/1] ========== cim-bug@hidden.uio.no ==========
+From:    kdxuyws@hotmail.com
+Subject: You can give your pa.rtn.er more p.lea.sur.e
+Reason:  Message has implicit destination                      Spam? 8
+Automatically discarded as spam.
+Submit changes? [yes]
+
+fetching data for drift@hidden.uio.no ... nothing in queue
+fetching data for usenet@hidden.uio.no ... nothing in queue
+fetching data for timekeeper@hidden.uio.no ... nothing in queue
+: [kjetilho@rovereto ~];
+
+   All done!

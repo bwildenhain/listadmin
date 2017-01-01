@@ -1,0 +1,16 @@
+In order to install listadmin, you need these perl modules:
+
+HTML::TokeParser
+LWP::UserAgent
+MIME::Base64
+MIME::QuotedPrint
+Data::Dumper
+Term::ReadLine
+Getopt::Long
+Text::Reform
+I18N::Langinfo
+Encode
+strict
+English
+IO::Socket::SSL
+Net::INET6Glue::INET_is_INET6
