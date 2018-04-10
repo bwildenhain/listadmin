@@ -1,0 +1,11 @@
+2.42 2016-12-23  Johnny A. Solbu <johnny@solbu.net>
+	* Fix Parsing of undecoded UTF-8 error
+	* Add IPv6 support (Debian bug #699768)
+	* Use proper filename for manpage (listadmin.man > listadmin.1)
+
+2.41 2016-12-22  Johnny A. Solbu <johnny@solbu.net>
+	* Applied Debian pathces
+	  - Add support for discarding subscription requests
+	  - Add translations
+	  - Add option to disable certificate checking (Debian bug #707787)
+	  - Add option to configure which CA certificate file to use
