@@ -29,7 +29,7 @@ $(TARFILE): $(SRCFILES) listadmin.txt
 	@rm -rf listadmin-$(VERSION)
 	mkdir listadmin-$(VERSION)
 	cp $(SRCFILES) listadmin.txt listadmin-$(VERSION)/
-	tar cf - listadmin-$(VERSION) | gzip -9 > $(TARFILE)
+	tar acf $(TARFILE) listadmin-$(VERSION)
 	rm -rf listadmin-$(VERSION)
 
 dist: $(TARFILE)
