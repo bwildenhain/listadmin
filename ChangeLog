@@ -5,11 +5,13 @@
 	  now let you automatically approve senders
 
 2.42 2016-12-23  Johnny A. Solbu <johnny@solbu.net>
+
 	* Fix Parsing of undecoded UTF-8 error
 	* Add IPv6 support (Debian bug #699768)
 	* Use proper filename for manpage (listadmin.man > listadmin.1)
 
 2.41 2016-12-22  Johnny A. Solbu <johnny@solbu.net>
+
 	* Applied Debian pathces
 	  - Add support for discarding subscription requests
 	  - Add translations
