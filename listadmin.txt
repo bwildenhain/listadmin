@@ -154,6 +154,10 @@ LISTADMIN(1)                General Commands Manual               LISTADMIN(1)
                      As above, but matches against Mailman's reason for
                      holding the message for approval.
 
+              approve_if_from [4mpattern[0m
+                     If the message's From header matches the pattern, it will
+                     be approved automatically.
+
               subscription_default [4maction[0m
                      Specifies the action to take when the user presses just
                      Return while processing subscriptions.  Available actions
@@ -309,6 +313,9 @@ LISTADMIN(1)                General Commands Manual               LISTADMIN(1)
           discard_if_reason "Message has implicit|Too many recipients"
           discard_if_from ^(postmaster|mailer(-daemon)?|listproc|no-reply)@
 
+          # These senders are automatically approved
+          approve_if_from "good-sender@example.com|another-one@example.net"
+
           foo-devel@example.net
 
           # No one should ever send e-mail to the next list, so throw it
@@ -342,7 +349,6 @@ LISTADMIN(1)                General Commands Manual               LISTADMIN(1)
 
 [1mAUTHOR[0m
        Kjetil T. Homme <kjetilho+listadmin@ifi.uio.no>
-
        Project manager: Johnny A. Solbu <johnny@solbu.net>
 
-                                  2016-12-21                      LISTADMIN(1)
+                                  2018-04-11                      LISTADMIN(1)
