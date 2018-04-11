@@ -1,3 +1,9 @@
+2.50 2018-04-11  Johnny A. Solbu <solbu@solbu-1>
+
+	* Add whitelist option
+	  Adding approve_if_from in the config file
+	  now let you automatically approve senders
+
 2.42 2016-12-23  Johnny A. Solbu <johnny@solbu.net>
 	* Fix Parsing of undecoded UTF-8 error
 	* Add IPv6 support (Debian bug #699768)
