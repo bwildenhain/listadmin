@@ -1,4 +1,4 @@
-2.50 2018-04-11  Johnny A. Solbu <solbu@solbu-1>
+2.50 2018-04-11  Johnny A. Solbu <solbu@solbu.net>
 
 	* Add whitelist option
 	  Adding approve_if_from in the config file
