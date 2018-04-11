@@ -4,7 +4,7 @@
 # Written 2003 - 2007 by
 # Kjetil Torgrim Homme <kjetilho+listadmin@ifi.uio.no>
 #
-# 2016: Johnny A. Solbu <johnny@solbu.net>
+# 2016 - 2018: Johnny A. Solbu <johnny@solbu.net>
 #
 # Thank you, Sam Watkins and Bernie Hoeneisen, for contributions and
 # feedback.
@@ -341,6 +341,7 @@ sub approve_messages {
     my $dis_from = $config->{"discard_if_from"};
     my $dis_subj = $config->{"discard_if_subject"};
     my $dis_reas = $config->{"discard_if_reason"};
+    my $apr_from = $config->{"approve_if_from"};
 
     $count = keys (%{$info}) - 1;	# subtract 1 for globals
     my $search_pattern = "";
@@ -409,6 +410,17 @@ _end_
 		    print "Automatically discarded due to matching $match\n";
 		}
 		$ans = "d";
+	    }
+	    # Whitelist senders
+	    my $match2 = "";
+	    $ans ||= $config->{"action"};
+	    $match2 = "From_allow" if got_match ($from, $apr_from);
+	    $ans ||= "a" if $match2;
+	    if ($ans && $match2) {
+	        if ($match2 eq "From_allow") {
+	            print "Automatically appoved due to matching $match2\n";
+	        }
+	        $ans = "a";
 	    }
 	    my $def = $listdef;
 	    $def = $change->{$id}->[0]
@@ -1422,6 +1434,7 @@ sub read_config {
     my %cur = map { $_ => undef; }
 	    qw (not_spam_if_from
 		not_spam_if_subject
+		approve_if_from
 		discard_if_from
 		discard_if_subject
 		discard_if_reason);
