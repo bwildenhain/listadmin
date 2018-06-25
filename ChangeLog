@@ -1,4 +1,9 @@
-2.50 2018-04-11  Johnny A. Solbu <solbu@solbu.net>
+2.60 2018-06-25  Johnny A. Solbu <johnny@solbu.net>
+
+	* Patch from C. Michael Pilato
+	  - Add --dry-run and --discard-all modes
+
+2.50 2018-04-11  Johnny A. Solbu <johnny@solbu.net>
 
 	* Add whitelist option
 	  Adding approve_if_from in the config file
