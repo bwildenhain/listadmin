@@ -2,7 +2,7 @@ SHELL = /bin/sh
 # a BSD or GNU style install is required, e.g., /usr/ucb/install on Solaris
 INSTALL = install
 
-VERSION = 2.60
+VERSION = $(shell perl listadmin.pl --version|cut -f3 -d ' ')
 
 PREFIX = /usr/local
 prefix = $(PREFIX)
