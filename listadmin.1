@@ -1,4 +1,4 @@
-.TH LISTADMIN 1 "2018-04-11"
+.TH LISTADMIN 1 "2018-06-25"
 .\" turn off hyphenation
 .hy 0
 .\" turn on ragged right if run through nroff
@@ -24,6 +24,10 @@ completely automated configurations of \fBlistadmin\fP.
 Addresses added as subscribers will have \fInomail\fP turned off.
 .IP "--nomail"
 Addresses added as subscribers will have \fInomail\fP turned on.
+.IP "--dry-run"
+Acts as if the user responded with (S)kip to message handling queries.
+.IP "--discard-all"
+Acts as if the user responded with (D)iscard. Dry-run takes precedence.
 .IP "-a \fIfile\fP"
 Add e-mail addresses listed in \fIfile\fP (one address per line) to
 the subscriber list.  The welcome message is suppressed.
