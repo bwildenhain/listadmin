@@ -49,6 +49,8 @@ Usage: $0 [-f CONFIGFILE] [-t MINUTES] [{-a|-r} FILE] [-l] [LISTNAME]
   --remove-member ADDRESS
                    Remove ADDRESS from member list
   -l               List subscribers
+  --dry-run        Automatically (S)kip all held messages
+  --delete-all     Automatically (D)elete all held messages
   LISTNAME         Only process lists with name matching LISTNAME.
 
 If options which modify members are used, LISTNAME must match exactly
@@ -58,7 +60,8 @@ _end_
 }
 
 my ($opt_help, $opt_version, $opt_f, $opt_t, $opt_a, $opt_r,
-    @opt_add_member, @opt_remove_member, $opt_l);
+    @opt_add_member, @opt_remove_member, $opt_l, $opt_dryrun,
+    $opt_deleteall);
 my $opt_mail = 1;
 
 GetOptions("help|?" => \$opt_help,
@@ -70,6 +73,8 @@ GetOptions("help|?" => \$opt_help,
 	   "r=s" => \$opt_r,
 	   "add-member=s" => \@opt_add_member,
 	   "remove-member=s" => \@opt_remove_member,
+           "dry-run!" => \$opt_dryrun,
+           "delete-all!" => \$opt_deleteall,
 	   "l" => \$opt_l)
 	or usage();
 
@@ -428,12 +433,21 @@ _end_
 	    my $pr = $prompt;
 	    $pr .= " [" . uc($def) . "]" if $def;
 	    $pr .= " ? ";
-	    $ans ||= prompt ($pr);
-	    $ans = "q" unless defined $ans;
-	    $ans =~ s/^\s+//;
-	    $ans =~ s/\s+$//;
-	    $ans = $def if $ans eq "" && defined $def;
-	    $ans = lc $ans;
+            if ($opt_dryrun) {
+                # In dry-run mode, we (s)kip everything.
+                $ans = "s";
+            } elsif ($opt_deleteall) {
+                # In delete-all mode, we (d)elete everything.
+                $ans = "d";
+            } else {
+                # Otherwise, we prompt the user for action.
+                $ans ||= prompt ($pr);
+                $ans = "q" unless defined $ans;
+                $ans =~ s/^\s+//;
+                $ans =~ s/\s+$//;
+                $ans = $def if $ans eq "" && defined $def;
+                $ans = lc $ans;
+            }
 	    if ($ans eq "q") {
 		last msgloop;
 	    } elsif ($ans eq "s") {
