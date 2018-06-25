@@ -21,8 +21,7 @@ install:
 
 listadmin.txt: listadmin.1
 #	Note the verbatim backspace in the sed command
-	env TERM=dumb nroff -man $< | sed -e '/^XXX/d' -e 's/.//g' | uniq > $@.tmp
-	mv $@.tmp $@
+	man ./$< | col -b > $@
 
 TARFILE = listadmin-$(VERSION).tar.gz
 $(TARFILE): $(SRCFILES) listadmin.txt
@@ -40,3 +39,5 @@ distclean:
 # for my use only
 upload:
 	rsync -avh --progress $(TARFILE) solbu@frs.sourceforge.net:/home/frs/project/listadmin/$(VERSION)/
+
+.PHONY: listadmin.txt
