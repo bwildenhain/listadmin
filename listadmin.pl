@@ -50,7 +50,7 @@ Usage: $0 [-f CONFIGFILE] [-t MINUTES] [{-a|-r} FILE] [-l] [LISTNAME]
                    Remove ADDRESS from member list
   -l               List subscribers
   --dry-run        Automatically (S)kip all held messages
-  --delete-all     Automatically (D)elete all held messages
+  --discard-all    Automatically (D)iscard all held messages
   LISTNAME         Only process lists with name matching LISTNAME.
 
 If options which modify members are used, LISTNAME must match exactly
@@ -61,7 +61,7 @@ _end_
 
 my ($opt_help, $opt_version, $opt_f, $opt_t, $opt_a, $opt_r,
     @opt_add_member, @opt_remove_member, $opt_l, $opt_dryrun,
-    $opt_deleteall);
+    $opt_discardall);
 my $opt_mail = 1;
 
 GetOptions("help|?" => \$opt_help,
@@ -74,7 +74,7 @@ GetOptions("help|?" => \$opt_help,
 	   "add-member=s" => \@opt_add_member,
 	   "remove-member=s" => \@opt_remove_member,
            "dry-run!" => \$opt_dryrun,
-           "delete-all!" => \$opt_deleteall,
+           "discard-all!" => \$opt_discardall,
 	   "l" => \$opt_l)
 	or usage();
 
@@ -434,10 +434,10 @@ _end_
 	    $pr .= " [" . uc($def) . "]" if $def;
 	    $pr .= " ? ";
             if ($opt_dryrun) {
-                # In dry-run mode, we (s)kip everything.
+                # In dry-run mode, we (S)kip everything.
                 $ans = "s";
-            } elsif ($opt_deleteall) {
-                # In delete-all mode, we (d)elete everything.
+            } elsif ($opt_discardall) {
+                # In discard-all mode, we (D)iscard everything.
                 $ans = "d";
             } else {
                 # Otherwise, we prompt the user for action.
