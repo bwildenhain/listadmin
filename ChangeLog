@@ -1,3 +1,9 @@
+2.70 2018-08-08  Johnny A. Solbu <johnny@solbu.net>
+
+	* Patch from Jörg Sommer:
+	  - Add support for XDG Base Directory Specification
+	    If ~/.listadmin.ini doesnt exist, look for ~/.config/listadmin.ini
+
 2.60 2018-06-25  Johnny A. Solbu <johnny@solbu.net>
 
 	* Patch from C. Michael Pilato
