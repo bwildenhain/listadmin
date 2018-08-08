@@ -17,7 +17,7 @@ DESCRIPTION
 OPTIONS
        -f configfile
 	      Fetch list of mailing lists from configfile rather than the
-	      default (~/.listadmin.ini).
+	      default (~/.listadmin.ini or ~/.config/listadmin.ini).
 
        -t minutes
 	      Stop processing after minutes has passed.	 Mostly useful for
@@ -355,6 +355,7 @@ ENVIRONMENT
 
 FILES
        $HOME/.listadmin.ini
+       $HOME/.config/listadmin.ini
 
        The default configuration file.
 

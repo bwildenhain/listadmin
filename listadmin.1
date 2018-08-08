@@ -16,7 +16,7 @@ mailing lists.
 .SH OPTIONS
 .IP "-f \fIconfigfile\fP"
 Fetch list of mailing lists from \fIconfigfile\fP rather than the
-default (\fB~/.listadmin.ini\fP).
+default (\fB~/.listadmin.ini\fP or \fB~/.config/listadmin.ini\fP).
 .IP "-t \fIminutes\fP"
 Stop processing after \fIminutes\fP has passed.  Mostly useful for
 completely automated configurations of \fBlistadmin\fP.
@@ -310,6 +310,8 @@ The character set support is deduced from this variable.
 
 .SH FILES
 \fB$HOME/.listadmin.ini\fP
+.br
+\fB$HOME/.config/listadmin.ini\fP
 .PP
 The default configuration file.
 
