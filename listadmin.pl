@@ -31,6 +31,13 @@ use IO::Socket::SSL;
 use Net::INET6Glue::INET_is_INET6;
 
 my $rc = $ENV{"HOME"}."/.listadmin.ini";
+unless (-r $rc) {
+    eval(q{
+         use File::BaseDir;
+         $rc = (File::BaseDir::config_files 'listadmin.ini')[0]
+            || (File::BaseDir::config_home 'listadmin.ini')[0];
+         });
+}
 
 sub usage {
     my ($exit_val) = @_;
