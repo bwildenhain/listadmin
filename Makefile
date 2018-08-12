@@ -20,7 +20,6 @@ install:
 	$(INSTALL) -m 644 listadmin.1 $(DESTDIR)$(mandir)/man1/listadmin.1
 
 listadmin.txt: listadmin.1
-#	Note the verbatim backspace in the sed command
 	man ./$< | col -b > $@
 
 TARFILE = listadmin-$(VERSION).tar.gz
