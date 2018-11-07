@@ -9,7 +9,7 @@ prefix = $(PREFIX)
 bindir = $(prefix)/bin
 mandir = $(prefix)/share/man
 
-SRCFILES = Makefile listadmin.pl listadmin.1 ChangeLog sample-session.txt
+SRCFILES = Makefile listadmin.pl listadmin.1 ChangeLog sample-session.txt INSTALL
 
 all:
 	@echo Nothing needs to be done
