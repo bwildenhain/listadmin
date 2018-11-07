@@ -1420,7 +1420,12 @@ sub parse_approval {
 	$subject .= " [unencoded]";
     }
 
-    $data->{$id}->{"subject"} = decode_rfc2047($subject, $config);
+    $subject = decode_rfc2047($subject, $config);
+
+    # Replace line breaks with a single space character.
+    $subject =~ s/[\n\r]/ /g;
+    
+    $data->{$id}->{"subject"} = $subject;
 
     $body .= "\n" unless $body =~ /\n$/;
     $data->{$id}->{"body"} = $body;
