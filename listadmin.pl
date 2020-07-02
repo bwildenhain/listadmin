@@ -4,15 +4,27 @@
 # Written 2003 - 2007 by
 # Kjetil Torgrim Homme <kjetilho+listadmin@ifi.uio.no>
 #
-# 2016 - 2018: Johnny A. Solbu <johnny@solbu.net>
+# 2016 - 2018 : Johnny A. Solbu <johnny@solbu.net>
+# 2020        : Benedikt Wildenhain <benedikt.wildenhain@hs-bochum.de>
 #
 # Thank you, Sam Watkins and Bernie Hoeneisen, for contributions and
 # feedback.
 #
-# Released into public domain.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 
-my $version = "2.71";
-my $maintainer = "johnny\@solbu.net";
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+my $version = "2.71b";
+my $maintainer = "benedikt.wildenhain@hs-bochum.de";
 
 use HTML::TokeParser;
 use LWP::UserAgent;
@@ -1852,6 +1864,15 @@ sub remove_subscribers {
 	$params{$a . "_unsub"} = "on";			# Mailman 2.x
     }
     my $resp = $ua->post($url, \%params);
+    return $resp->status_line unless $resp->is_success;
+
+    # Mailman 2.1.29
+    %params = (send_unsub_ack_to_this_batch => 0,
+		    send_unsub_notifications_to_list_owner => 0,
+		    unsubscribees => join("\n", @addresses),
+		  adminpw => $config->{password}
+		  );
+    $resp = $ua->post("$url/remove", \%params);
     return $resp->status_line unless $resp->is_success;
 
     return parse_subscribe_response($resp->decoded_content );
