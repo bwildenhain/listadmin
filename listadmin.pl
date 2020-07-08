@@ -24,7 +24,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 my $version = "2.71b";
-my $maintainer = "benedikt.wildenhain@hs-bochum.de";
+my $maintainer = "benedikt.wildenhain\@hs-bochum.de";
 
 use HTML::TokeParser;
 use LWP::UserAgent;
